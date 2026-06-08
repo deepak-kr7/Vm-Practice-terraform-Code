@@ -1,0 +1,7 @@
+variable "stg" {
+ 
+}
+
+variable "container" {
+  
+}
