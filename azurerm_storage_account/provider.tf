@@ -11,7 +11,7 @@ provider "azurerm" {
 }
 
 resource "random_string" "random1" {
-  length  = 6
+  length  = 2
   special = false
   upper   = false
 }

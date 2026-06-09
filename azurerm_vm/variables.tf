@@ -8,5 +8,20 @@ variable "vm_cfg" {
     vm_size     = string
     username    = string
     password    = string
+    nsg_name    = string
+    
+    # Nested Map for Extra Disks
+    extra_disks = map(object({
+      size_gb = number
+      type    = string
+    }))
+
+    # Map for Image Details
+    image = object({
+      publisher = string
+      offer     = string
+      sku       = string
+      version   = string
+    })
   }))
 }

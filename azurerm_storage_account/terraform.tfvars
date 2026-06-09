@@ -1,13 +1,13 @@
 stg = {
   stg1 = { 
-    name = "storage"
+    name = "newstg22"
     rg_name = "rg-practice1"
     location = "East US"
     tier = "Standard"
     rep_type = "LRS"
      }
   stg2 = { 
-    name = "storage"
+    name = "newstg33"
     rg_name = "rg-practice2"
     location = "West US"
     tier = "Standard"
