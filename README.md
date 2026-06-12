@@ -48,6 +48,16 @@ Secure access (RDP/SSH) ke liye Bastion set karein.
 *   **Kyun?** Iske liye `AzureBastionSubnet` ka hona zaroori hai (Step 3).
 *   **Action:** `cd ../azurerm_bastion && terraform apply`
 
+### Step 9: Storage Account (`azurerm_storage_account`)
+Data persistence ke liye storage account banayein.
+*   **Kyun?** Files aur data save karne ke liye.
+*   **Action:** `cd ../azurerm_storage_account && terraform apply`
+
+### Step 10: Storage Container (`azurerm_storage_container`)
+Storage account ke andar logical container banayein.
+*   **Kyun?** Blobs aur files ko organize karne ke liye. Storage account ka deploy hona zaroori hai.
+*   **Action:** `cd ../azurerm_storage_container && terraform apply`
+
 ---
 
 ## 🛠 Prerequisites & Workflow
@@ -66,9 +76,10 @@ Secure access (RDP/SSH) ke liye Bastion set karein.
 ---
 
 ## 💡 Pro-Tips
+*   **Provider Version:** Sabhi modules mein `azurerm` provider version ko `~> 4.0` kar diya gaya hai taaki 4.x series ke updates automatically mil sakein.
 *   **Variables Sync:** Sabhi folders ke `terraform.tfvars` mein Resource Group aur Location match honi chahiye.
 *   **Destruction Sequence:** Agar resources delete karne ho, to **Reverse Order** follow karein:
-    `Bastion -> Peering -> VM -> NSG -> NIC -> Subnet -> VNet -> RG`
+    `Container -> Storage Account -> Bastion -> Peering -> VM -> NSG -> NIC -> Subnet -> VNet -> RG`
 *   **Sensitive Data:** `terraform.tfvars` files are now tracked in this repo for practice purposes, but be careful with secrets in production.
 
 ---
@@ -84,6 +95,8 @@ Secure access (RDP/SSH) ke liye Bastion set karein.
 ├── azurerm_vm/
 ├── azurerm_vnet_peering/
 ├── azurerm_bastion/
+├── azurerm_storage_account/
+├── azurerm_storage_container/
 └── README.md
 ```
 

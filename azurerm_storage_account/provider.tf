@@ -1,4 +1,3 @@
-
 terraform {
   required_providers {
     azurerm = {
@@ -7,9 +6,12 @@ terraform {
     }
   }
 }
-
 provider "azurerm" {
-  features {
+  features {}
+}
 
-  }
+resource "random_string" "random1" {
+  length  = 2
+  special = false
+  upper   = false
 }
