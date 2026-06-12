@@ -1,5 +1,5 @@
-resource "azurerm_resource_group" "rgs" {
-  for_each = var.rgs
-  name     = each.key
+resource "azurerm_resource_group" "rgblock" {
+  for_each = var.rg
+  name     = each.value.name
   location = each.value.location
 }

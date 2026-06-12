@@ -1,9 +1,10 @@
-variable "nsg_cfg" {
+variable "nsg" {
   type = map(object({
-    name     = string
-    rg_name  = string
-    location = string
-    rules = map(object({
+    name                = string
+    location            = string
+    resource_group_name = string
+    nic_name            = string # Added to map NSG to a NIC
+    rules = list(object({
       name                       = string
       priority                   = number
       direction                  = string

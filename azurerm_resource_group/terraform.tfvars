@@ -1,4 +1,11 @@
-rgs = {
-  "rg-practice1" = { location = "Central india" }
-  "rg-practice2" = { location = "austriaeast" }
+rg = {
+  rg1 = {
+    name     = "Test_dev_rg"
+    location = "central india"
+  }
+
+  rg2 = {
+    name     = "Test_dev_rg2"
+    location = "west us"
+  }
 }

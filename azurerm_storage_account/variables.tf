@@ -1,7 +1,0 @@
-variable "stg" {
- 
-}
-
-variable "container" {
-  
-}

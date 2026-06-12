@@ -1,9 +1,8 @@
-peering_cfg = {
+peering = {
   p1 = {
-    rg_name            = "rg-practice1"
-    vnet_name          = "vnet-practice-east"
-
-    remote_rg_name     = "rg-practice2"
-    remote_vnet_name   = "vnet-practice-west"
+    vnet1_name = "Vnet_india"
+    vnet1_rg   = "Test_dev_rg"
+    vnet2_name = "Vnet_us"
+    vnet2_rg   = "Test_dev_rg2"
   }
 }

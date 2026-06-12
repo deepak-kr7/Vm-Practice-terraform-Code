@@ -1,11 +1,12 @@
-nsg_cfg = {
-  "nsg1" = {
-    name     = "nsg-frontend"
-    rg_name  = "rg-practice1"
-    location = "Central india"
-    rules = {
-      rule1 = {
-        name                       = "AllowSSH"
+nsg = {
+  nsg1 = {
+    name                = "india-nsg"
+    location            = "central india"
+    resource_group_name = "Test_dev_rg"
+    nic_name            = "nic_1"
+    rules = [
+      {
+        name                       = "allow-ssh"
         priority                   = 100
         direction                  = "Inbound"
         access                     = "Allow"
@@ -14,9 +15,9 @@ nsg_cfg = {
         destination_port_range     = "22"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-      }
-      rule2 = {
-        name                       = "AllowHTTP"
+      },
+      {
+        name                       = "allow-http"
         priority                   = 110
         direction                  = "Inbound"
         access                     = "Allow"
@@ -26,16 +27,16 @@ nsg_cfg = {
         source_address_prefix      = "*"
         destination_address_prefix = "*"
       }
-    }
+    ]
   }
-
-  "nsg2" = {
-    name     = "nsg-frontend-west"
-    rg_name  = "rg-practice2"
-    location = "austriaeast"
-    rules = {
-      rule1 = {
-        name                       = "AllowSSH"
+  nsg2 = {
+    name                = "us-nsg"
+    location            = "west us"
+    resource_group_name = "Test_dev_rg2"
+    nic_name            = "nic_2"
+    rules = [
+      {
+        name                       = "allow-ssh"
         priority                   = 100
         direction                  = "Inbound"
         access                     = "Allow"
@@ -44,9 +45,9 @@ nsg_cfg = {
         destination_port_range     = "22"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-      }
-      rule2 = {
-        name                       = "AllowHTTP"
+      },
+      {
+        name                       = "allow-http"
         priority                   = 110
         direction                  = "Inbound"
         access                     = "Allow"
@@ -56,6 +57,6 @@ nsg_cfg = {
         source_address_prefix      = "*"
         destination_address_prefix = "*"
       }
-    }
+    ]
   }
 }
