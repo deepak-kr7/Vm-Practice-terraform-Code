@@ -1,47 +1,72 @@
-# Azure Infrastructure Deployment Guide (Step-by-Step)
+# Vm-Practice-terraform-Code
+# Azure Terraform Practice Repository
 
-Azure mein infrastructure deploy karne ka sahi sequence niche diya gaya hai. Is sequence ko follow karne se "Dependency Errors" nahi aayenge.
+This repository contains Terraform configurations for provisioning and managing Azure infrastructure components. It is designed for learning and practicing Infrastructure as Code (IaC) concepts using Terraform and the AzureRM provider.
 
----
+## 🚀 Recommended Deployment Sequence
 
-### Step 1: Resource Group (`azurerm_resource_group`)
-Sabse pehle container banayein jahan baaki sab rahega.
-*   **Kyun?** Bina RG ke koi bhi resource nahi ban sakta.
-*   **Folder:** `azurerm_resource_group/`
+To avoid dependency errors, follow this order for the first run:
 
-### Step 2: Virtual Network (`azurerm_vnet`)
-Network layout aur subnets define karein.
-*   **Kyun?** VM aur Bastion ko IP addresses isi network se milenge.
-*   **Folder:** `azurerm_vnet/`
+1.  **Resource Group** (`azurerm_resource_group`)
+2.  **Virtual Network** (`azurerm_vnet`)
+3.  **Subnet** (`azurerm_subnet`)
+4.  **Network Interface** (`azurerm_nic`)
+5.  **Network Security Group** (`azurerm_nsg`)
+6.  **Virtual Machine** (`azurerm_vm`)
+7.  **VNet Peering** (`azurerm_vnet_peering`)
+8.  **Bastion Host** (`azurerm_bastion`)
 
-### Step 3: Network Security Group (`azurerm_nsg`)
-Security rules (Ports 22, 80, 443) tayyar karein.
-*   **Kyun?** VM banne se pehle security rules ready hone chahiye taaki bante hi rules apply ho sakein.
-*   **Folder:** `azurerm_nsg/`
+For detailed steps, refer to the [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md).
 
-### Step 4: Storage Account (`azurerm_storage_account`) - *Optional*
-Agar Boot Diagnostics ya scripts store karni hain.
-*   **Folder:** `azurerm_storage_account/`
+## Resources Covered
 
-### Step 5: Virtual Machine (`azurerm_vm`)
-Ab VM banayein aur use Step 2 (Subnet) aur Step 3 (NSG) se connect karein.
-*   **Kyun?** Is step par VM ko NIC, Public IP, aur NSG Association milta hai.
-*   **Folder:** `azurerm_vm/`
+* Azure Resource Group
+* Azure Virtual Network (VNet) & Subnets
+* Azure Network Interface (NIC)
+* Azure Network Security Group (NSG)
+* Azure Virtual Machine (VM)
+* Azure Bastion Host
+* Azure VNet Peering
 
-### Step 6: VNet Peering (`azurerm_vnet_peering`)
-Agar do alag VNet ke beech connection chahiye.
-*   **Kyun?** Dono VNet ka pehle se bana hona zaroori hai.
-*   **Folder:** `azurerm_vnet_peering/` ya `peering/`
+## Repository Structure
 
-### Step 7: Bastion Host (`azurerm_bastion`)
-Secure access ke liye Bastion set karein.
-*   **Kyun?** Bastion ke liye ek khaas subnet (`AzureBastionSubnet`) chahiye hota hai jo Step 2 mein banta hai.
+```text
+.
+├── azurerm_resource_group/
+├── azurerm_vnet/
+├── azurerm_subnet/
+├── azurerm_nic/
+├── azurerm_nsg/
+├── azurerm_vm/
+├── azurerm_vnet_peering/
+├── azurerm_bastion/
+└── README.md
+```
+
+## Prerequisites
+
+* Terraform
+* Azure CLI
+* Azure Subscription
+
+## Quick Start
+
+1. Login to Azure: `az login`
+2. Navigate to a resource folder: `cd azurerm_resource_group`
+3. Initialize: `terraform init`
+4. Apply: `terraform apply`
+
+## Author
+
+Deepak Kumar
+GitHub: [https://github.com/deepak-kr7](https://github.com/deepak-kr7)
+e access (RDP/SSH) ke liye Bastion set karein.
+*   **Kyun?** Iske liye `AzureBastionSubnet` ka hona zaroori hai (Step 3).
 *   **Folder:** `azurerm_bastion/`
 
 ---
 
-## Pro-Tips for Next Time:
-1.  **Variables Sync:** Hamesha check karein ki `azurerm_vm` ke `terraform.tfvars` mein wahi RG aur VNet ka naam ho jo aapne Step 1 aur 2 mein banaya hai.
-2.  **NSG Association:** VM banate waqt use Subnet level par associate karna portal visibility ke liye best rehta hai.
-3.  **Destruction Sequence:** Agar delete karna ho, to hamesha **Ulta (Reverse)** chalein:
-    `Bastion -> Peering -> VM -> NSG -> VNet -> RG`
+## Pro-Tips:
+1.  **Variables Sync:** Sabhi folders ke `terraform.tfvars` mein Resource Group aur Location match honi chahiye.
+2.  **Destruction Sequence:** Agar resources delete karne ho, to **Reverse Order** follow karein:
+    `Bastion -> Peering -> VM -> NSG -> NIC -> Subnet -> VNet -> RG`
